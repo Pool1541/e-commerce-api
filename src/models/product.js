@@ -19,8 +19,7 @@ const ProducthSchema = new Schema({
     required: true,
   },
   category: {
-    type: Types.ObjectId,
-    ref: "Category",
+    type: String,
     required: true,
   },
   countInStock: {

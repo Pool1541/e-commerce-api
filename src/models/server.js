@@ -3,6 +3,7 @@ const cors = require("cors");
 const dbConnection = require("../database/config");
 const userRouter = require("../routes/user.routes");
 const productRouter = require("../routes/product.routes");
+const categoryRouter = require("../routes/category.routes");
 
 class Server {
   constructor() {
@@ -10,6 +11,7 @@ class Server {
     this.PORT = process.env.PORT || 8080;
     this.userPath = "/api/users";
     this.productPath = "/api/products";
+    this.categoryPath = "/api/category";
 
     this.connectDB();
     this.middlewares();
@@ -29,6 +31,7 @@ class Server {
   routes() {
     this.app.use(this.userPath, userRouter);
     this.app.use(this.productPath, productRouter);
+    this.app.use(this.categoryPath, categoryRouter);
   }
 
   start() {
