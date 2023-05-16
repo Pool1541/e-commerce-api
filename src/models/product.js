@@ -4,6 +4,7 @@ const ProducthSchema = new Schema({
   title: {
     type: String,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
@@ -20,6 +21,7 @@ const ProducthSchema = new Schema({
   category: {
     type: Types.ObjectId,
     ref: "Category",
+    required: true,
   },
   countInStock: {
     type: Number,
