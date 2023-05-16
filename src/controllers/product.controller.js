@@ -2,8 +2,15 @@ const { request, response } = require("express");
 const Product = require("../models/product");
 
 const getProducts = async (req = request, res = response) => {
-  const products = await Product.find();
+  const { category } = req.query;
+
+  const query = category && { category };
+
+  const count = await Product.countDocuments(query);
+  const products = await Product.find(query);
+
   res.json({
+    count,
     products,
   });
 };
