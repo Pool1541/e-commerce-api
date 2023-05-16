@@ -1,13 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const dbConnection = require("../database/config");
-const router = require("../routes/user.routes");
+const userRouter = require("../routes/user.routes");
+const productRouter = require("../routes/product.routes");
 
 class Server {
   constructor() {
     this.app = express();
     this.PORT = process.env.PORT || 8080;
     this.userPath = "/api/users";
+    this.productPath = "/api/products";
 
     this.connectDB();
     this.middlewares();
@@ -25,7 +27,8 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.userPath, router);
+    this.app.use(this.userPath, userRouter);
+    this.app.use(this.productPath, productRouter);
   }
 
   start() {
