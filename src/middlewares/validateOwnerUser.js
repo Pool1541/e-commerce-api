@@ -7,7 +7,7 @@ const validateOwnerUser = (req = request, res = response, next) => {
 
   if (uidFromToken !== uidFromParams) {
     return res.status(403).json({
-      message: "You do not have permission to delete this user.",
+      message: "You do not have permission for this user",
     });
   }
 

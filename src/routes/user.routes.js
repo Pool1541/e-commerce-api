@@ -15,10 +15,11 @@ const {
 } = require("../helpers/db-validations");
 const { validateJWT } = require("../middlewares/validateJWT");
 const { validateOwnerUser } = require("../middlewares/validateOwnerUser");
+const { isAdminRole } = require("../middlewares/validateRole");
 
 const router = Router();
 
-router.get("/", getUsers);
+router.get("/", [validateJWT, isAdminRole], getUsers);
 
 router.post(
   "/",
