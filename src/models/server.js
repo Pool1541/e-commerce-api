@@ -4,6 +4,7 @@ const dbConnection = require("../database/config");
 const userRouter = require("../routes/user.routes");
 const productRouter = require("../routes/product.routes");
 const categoryRouter = require("../routes/category.routes");
+const authRouter = require("../routes/auth.routes");
 
 class Server {
   constructor() {
@@ -12,6 +13,7 @@ class Server {
     this.userPath = "/api/users";
     this.productPath = "/api/products";
     this.categoryPath = "/api/category";
+    this.authPath = "/api/auth";
 
     this.connectDB();
     this.middlewares();
@@ -29,6 +31,7 @@ class Server {
   }
 
   routes() {
+    this.app.use(this.authPath, authRouter);
     this.app.use(this.userPath, userRouter);
     this.app.use(this.productPath, productRouter);
     this.app.use(this.categoryPath, categoryRouter);

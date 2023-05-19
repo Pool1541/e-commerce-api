@@ -51,6 +51,12 @@ const changeUser = (req = request, res = response) => {
 const deleteUser = async (req = request, res = response) => {
   const { id } = req.params;
 
+  // TODO - Para que un usuario elimine su propia cuenta necesita :
+  // ✅Logearse con su cuenta y obtener un token válido
+  // ✅Solicitar la eliminación de la cuenta a través del endpoint y el método correcto
+  // ✅Enviar a través de la solicitud http tanto el uid en los parámetros como el token en los headers
+  // ✅El uid que contiene el payload del token debe ser el mismo que el uid del parámetro en la solicitud http
+
   const user = await User.findByIdAndUpdate(id, { status: false });
 
   res.json({ message: `${user.name} your account has been deleted` });

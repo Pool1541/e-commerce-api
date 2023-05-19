@@ -13,10 +13,13 @@ const {
   usernameExists,
   idExist,
 } = require("../helpers/db-validations");
+const { validateJWT } = require("../middlewares/validateJWT");
+const { validateOwnerUser } = require("../middlewares/validateOwnerUser");
 
 const router = Router();
 
 router.get("/", getUsers);
+
 router.post(
   "/",
   [
@@ -31,20 +34,29 @@ router.post(
   createUser
 );
 router.put("/:id", changeUser);
+
 router.patch(
   "/:id",
   [
+    validateJWT,
     check("password", "password need more than 6 characters").isLength({
       min: 7,
     }),
     check("id").isMongoId().custom(idExist),
     validateInputs,
+    validateOwnerUser,
   ],
   changePassword
 );
+
 router.delete(
   "/:id",
-  [check("id").isMongoId().custom(idExist), validateInputs],
+  [
+    validateJWT,
+    check("id").isMongoId().custom(idExist),
+    validateInputs,
+    validateOwnerUser,
+  ],
   deleteUser
 );
 
