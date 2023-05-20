@@ -5,6 +5,7 @@ const userRouter = require("../routes/user.routes");
 const productRouter = require("../routes/product.routes");
 const categoryRouter = require("../routes/category.routes");
 const authRouter = require("../routes/auth.routes");
+const adminRouter = require("../routes/admin.routes");
 
 class Server {
   constructor() {
@@ -14,6 +15,7 @@ class Server {
     this.productPath = "/api/products";
     this.categoryPath = "/api/category";
     this.authPath = "/api/auth";
+    this.adminPath = "/api/admin";
 
     this.connectDB();
     this.middlewares();
@@ -32,6 +34,7 @@ class Server {
 
   routes() {
     this.app.use(this.authPath, authRouter);
+    this.app.use(this.adminPath, adminRouter);
     this.app.use(this.userPath, userRouter);
     this.app.use(this.productPath, productRouter);
     this.app.use(this.categoryPath, categoryRouter);
