@@ -3,7 +3,7 @@ const { check } = require("express-validator");
 const {
   createUser,
   deleteUser,
-  getUsers,
+  getUserInfo,
   changePassword,
   changeUser,
 } = require("../controllers/user.controller");
@@ -15,11 +15,19 @@ const {
 } = require("../helpers/db-validations");
 const { validateJWT } = require("../middlewares/validateJWT");
 const { validateOwnerUser } = require("../middlewares/validateOwnerUser");
-const { hasRole } = require("../middlewares/validateRole");
 
 const router = Router();
 
-router.get("/", [validateJWT, hasRole("SUPER_ADMIN")], getUsers);
+router.get(
+  "/:id",
+  [
+    validateJWT,
+    check("id", "user not found").isMongoId().custom(userExist),
+    validateInputs,
+    validateOwnerUser,
+  ],
+  getUserInfo
+);
 
 router.post(
   "/",

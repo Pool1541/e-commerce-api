@@ -3,25 +3,18 @@ const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
 const { generateJWT } = require("../helpers/generateJWT");
 
-const getUsers = async (req = request, res = response) => {
+const getUserInfo = async (req = request, res = response) => {
   // TODO: Esta ruta es para usuarios normales
-  // Debería traer solo la información del usuario que está solicitando la petición de sus datos.
-  // Debería validarse que el token de acceso pertenezca al usuario que está solicitando los datos.
-  // Endpoint : /api/users/:id
-  // headers : Autorization : <token>
-  // Method : GET
-
-  const { limit = 5, from = 0 } = req.query;
-  const query = { status: true };
-
-  const [count, usersResult] = await Promise.all([
-    User.countDocuments(query),
-    User.find(query).skip(Number(from)).limit(Number(limit)),
-  ]);
+  // ✅Debería traer solo la información del usuario que está solicitando la petición de sus datos.
+  // ✅Debería validarse que el token de acceso pertenezca al usuario que está solicitando los datos.
+  // ✅Endpoint : /api/users/:id
+  // ✅headers : Autorization : <token>
+  // ✅Method : GET
+  const { id } = req.params;
+  const user = await User.findById(id);
 
   res.json({
-    count,
-    usersResult,
+    user,
   });
 };
 
@@ -86,7 +79,7 @@ const deleteUser = async (req = request, res = response) => {
 };
 
 module.exports = {
-  getUsers,
+  getUserInfo,
   createUser,
   changePassword,
   changeUser,
