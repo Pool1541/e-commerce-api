@@ -1,5 +1,7 @@
 const { request, response } = require("express");
+const bcryptjs = require("bcryptjs");
 const User = require("../models/user");
+const { generateJWT } = require("../helpers/generateJWT");
 
 const getUsers = async (req = request, res = response) => {
   // ✅TODO: Esta ruta es para el super administrador
@@ -24,6 +26,31 @@ const getUsers = async (req = request, res = response) => {
   });
 };
 
+const createAdmin = async (req = request, res = response) => {
+  const { name, username, email, password } = req.body;
+  const role = "ADMIN";
+
+  const user = new User({
+    name,
+    username,
+    email,
+    password,
+    role,
+  });
+
+  const salt = bcryptjs.genSaltSync();
+  user.password = bcryptjs.hashSync(password, salt);
+
+  const [_, token] = await Promise.all([user.save(), generateJWT(user.id)]);
+
+  res.json({
+    message: "User created successfully",
+    user,
+    token,
+  });
+};
+
 module.exports = {
   getUsers,
+  createAdmin,
 };

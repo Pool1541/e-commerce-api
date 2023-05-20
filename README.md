@@ -5,7 +5,7 @@
 `/api/admin`
 
 - ✅ GET - para solicitar los usuarios registrados. [Se require jwt y rol de super administrador]
-- ⌛ POST - para crear usuarios con privilegios de administrador. [Se require jwt y rol de super administrador]
+- ✅ POST - para crear usuarios con privilegios de administrador. [Se require jwt y rol de super administrador]
 - ⌛ PATCH - para modificar datos de cualquier usuario. [Se require jwt y rol de super administrador]
 - ⌛ DELETE - para borrar/desactivar cualquier usuario. [Se require jwt y rol de super administrador]
 
