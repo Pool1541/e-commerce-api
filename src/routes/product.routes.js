@@ -11,12 +11,16 @@ const {
   categoryExists,
 } = require("../helpers/db-validations");
 const validateInputs = require("../middlewares/validateInputs");
+const { validateJWT } = require("../middlewares/validateJWT");
+const { hasRole } = require("../middlewares/validateRole");
 const router = Router();
 
 router.get("/", getProducts);
 router.post(
   "/",
   [
+    validateJWT,
+    hasRole("ADMIN", "SUPER_ADMIN"),
     check("title", "title is required").notEmpty().custom(productTitleExists),
     check("description", "description is required").notEmpty(),
     check("price", "price is required")

@@ -1,6 +1,6 @@
 const { request, response } = require("express");
 
-const isAdminRole = (req = request, res = response, next) => {
+const isSuperAdminRole = (req = request, res = response, next) => {
   if (!req.user) {
     return res
       .status(500)
@@ -17,6 +17,19 @@ const isAdminRole = (req = request, res = response, next) => {
   next();
 };
 
+const hasRole = (...roles) => {
+  return (req = request, res = response, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(401).json({
+        message: `${req.user.name} is not authorized for this action`,
+      });
+    }
+
+    next();
+  };
+};
+
 module.exports = {
-  isAdminRole,
+  hasRole,
+  isSuperAdminRole,
 };
