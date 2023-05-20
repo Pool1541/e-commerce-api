@@ -11,7 +11,7 @@ const validateInputs = require("../middlewares/validateInputs");
 const {
   emailExists,
   usernameExists,
-  idExist,
+  userExist,
 } = require("../helpers/db-validations");
 const { validateJWT } = require("../middlewares/validateJWT");
 const { validateOwnerUser } = require("../middlewares/validateOwnerUser");
@@ -43,7 +43,7 @@ router.patch(
     check("password", "password need more than 6 characters").isLength({
       min: 7,
     }),
-    check("id").isMongoId().custom(idExist),
+    check("id").isMongoId().custom(userExist),
     validateInputs,
     validateOwnerUser,
   ],
@@ -54,7 +54,7 @@ router.delete(
   "/:id",
   [
     validateJWT,
-    check("id").isMongoId().custom(idExist),
+    check("id").isMongoId().custom(userExist),
     validateInputs,
     validateOwnerUser,
   ],

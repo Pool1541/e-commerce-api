@@ -18,9 +18,12 @@ const getProducts = async (req = request, res = response) => {
 };
 
 const createProduct = async (req = request, res = response) => {
-  // TODO: Esta ruta solo es para administradores de producto.
-  // Se debe validar el rol del usuario, solo pueden acceder los usuarios con rol "ADMIN" y "SUPER_ADMIN"
-  // La validación se hace a través del token
+  // TODO: Esta ruta solo es para administradores.
+  // ✅Solo los administradores pueden crear un producto
+  // ✅Se tiene que validar el token del usuario y el rol para eliminar un producto
+  // ✅Se debe establecer el token en los headers
+  // ✅Se deben enviar correctamente las propiedades requeridas en el body
+  // ✅body : title, description, price, image, category, countInStock | REQUERIDOS
   const { title, description, price, image, category, countInStock } = req.body;
 
   const product = new Product({
@@ -44,10 +47,27 @@ const updateProduct = (req = request, res = response) => {
   });
 };
 
-const deleteProduct = (req = request, res = response) => {
-  res.json({
-    message: "DELETE from products controller",
-  });
+const deleteProduct = async (req = request, res = response) => {
+  // TODO : Esta ruta solo es para administradores
+  // ✅Solo los administradores pueden borrar productos
+  // ✅Se tiene que validar el token del usuario y el rol para eliminar un producto
+  // ✅Se debe establecer el id del producto en los parámetros
+  // ✅Se debe establecer el token en los headers
+
+  try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndDelete(id);
+
+    res.json({
+      message: "Product deleted successfully",
+      product,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Error al eliminar el producto",
+    });
+  }
 };
 
 module.exports = {

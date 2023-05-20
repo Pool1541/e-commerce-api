@@ -9,6 +9,7 @@ const {
 const {
   productTitleExists,
   categoryExists,
+  productExist,
 } = require("../helpers/db-validations");
 const validateInputs = require("../middlewares/validateInputs");
 const { validateJWT } = require("../middlewares/validateJWT");
@@ -38,6 +39,16 @@ router.post(
   createProduct
 );
 router.put("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
+
+router.delete(
+  "/:id",
+  [
+    validateJWT,
+    hasRole("ADMIN", "SUPER_ADMIN"),
+    check("id").isMongoId().custom(productExist),
+    validateInputs,
+  ],
+  deleteProduct
+);
 
 module.exports = router;

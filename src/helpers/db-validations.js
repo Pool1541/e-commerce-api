@@ -1,9 +1,9 @@
 const Category = require("../models/category");
-const product = require("../models/product");
+const Product = require("../models/product");
 const User = require("../models/user");
 const mongoose = require("mongoose");
 
-const idExist = async (id = "") => {
+const userExist = async (id = "") => {
   let objectId;
   try {
     objectId = new mongoose.Types.ObjectId(id);
@@ -11,6 +11,17 @@ const idExist = async (id = "") => {
   const idExists = await User.findById(objectId);
   if (!idExists) {
     throw new Error("User not found");
+  }
+};
+
+const productExist = async (id = "") => {
+  let objectId;
+  try {
+    objectId = new mongoose.Types.ObjectId(id);
+  } catch (err) {}
+  const idExists = await Product.findById(objectId);
+  if (!idExists) {
+    throw new Error("Product not found");
   }
 };
 
@@ -36,7 +47,7 @@ const categoryExists = async (name = "") => {
 };
 
 const productTitleExists = async (title = "") => {
-  const productTitleExists = await product.findOne({ title });
+  const productTitleExists = await Product.findOne({ title });
   if (productTitleExists) {
     throw new Error("Product already exists");
   }
@@ -45,7 +56,8 @@ const productTitleExists = async (title = "") => {
 module.exports = {
   emailExists,
   usernameExists,
-  idExist,
+  userExist,
+  productExist,
   categoryExists,
   productTitleExists,
 };
