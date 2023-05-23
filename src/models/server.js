@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dbConnection = require("../database/config");
+const cookieParser = require("cookie-parser");
 const userRouter = require("../routes/user.routes");
 const productRouter = require("../routes/product.routes");
 const categoryRouter = require("../routes/category.routes");
@@ -24,6 +25,7 @@ class Server {
 
   middlewares() {
     this.app.use(cors());
+    this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(express.static("public"));
   }

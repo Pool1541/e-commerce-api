@@ -39,3 +39,16 @@
 ## endpoints públicos
 
 - ✅ GET - para solicitar los productos. [Público pero controlado por cors]
+
+## TODO
+
+**_Token de autorización_**: 15 minutos de duración.<br>
+**_Refresh token_**: 30 días de duración.
+
+- Insertar refresh Token vía cookies con una duración de 30 días cada vez que el usuario se registre o inicie sesión.
+- El frontend no debe guardar el token de autorización en el navegador (localStorage, sessionStorage, cookies).
+- Cada vez que el frontend solicite acceder a un endpoint protegido debe enviar el token de autorización mediante los headers.
+- Solo si el token de autorización ha expirado, se debe solicitar un nuevo token de autorización mediante el refresh token, enviandolo en una solicitud http al endpoint de refresh correspondiente, si el refresh token es válido, el servidor responderá con un nuevo token de autorización.
+- Si el refresh token está vencido o no es válido, se debe solicitar al usuario volver a iniciar sesión para obtener un nuevo refresh token.
+- Se debe crear un endpoint para el cierre de sesión.
+- Cuando el frontend solicite acceder a ese endpoint(cierre de sesión), desde el backend se borrará la cookie que contiene el refresh token.

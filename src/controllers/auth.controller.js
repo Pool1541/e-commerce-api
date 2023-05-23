@@ -1,7 +1,7 @@
 const { request, response } = require("express");
 const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
-const { generateJWT } = require("../helpers/generateJWT");
+const { generateJWT, generateRefreshJWT } = require("../helpers/generateJWT");
 
 const login = async (req = request, res = response) => {
   const { email, password } = req.body;
@@ -10,27 +10,34 @@ const login = async (req = request, res = response) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ msg: "User  not found" });
+      return res.status(400).json({ error: ["User  not found"] });
     }
 
     if (!user.status) {
-      return res.status(400).json({ msg: "User is not active" });
+      return res.status(400).json({ error: ["User is not active"] });
     }
 
     const isValidPassword = bcryptjs.compareSync(password, user.password);
     if (!isValidPassword) {
-      return res.status(400).json({ msg: "Invalid password" });
+      return res.status(400).json({ error: ["Wrong password"] });
     }
 
-    const token = await generateJWT(user.id);
+    const [token, refreshtokenResponse] = await Promise.all([
+      generateJWT(user.id),
+      generateRefreshJWT(user.id, res),
+    ]);
+
     res.json({
       user,
-      token,
+      stsTokenManager: {
+        ...token,
+        message: refreshtokenResponse,
+      },
     });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      msg: "Something went wrong",
+      error: ["Something went wrong"],
     });
   }
 };

@@ -65,7 +65,7 @@ const deleteProduct = async (req = request, res = response) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Error al eliminar el producto",
+      error: ["Error al eliminar el producto"],
     });
   }
 };
