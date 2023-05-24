@@ -33,9 +33,10 @@ const generateRefreshJWT = (uid = "", res) => {
           console.log(error);
           reject("Couldn't create refresh token");
         } else {
-          res.cookie("refreshtoken", token, {
+          res.cookie("refreshToken", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: true,
+            sameSite: "none",
             expires: new Date(Date.now() + 60 * 60 * 24 * 30 * 1000),
           });
           resolve("Refresh token saved on cookie");

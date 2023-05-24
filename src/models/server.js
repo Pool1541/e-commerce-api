@@ -17,6 +17,10 @@ class Server {
     this.categoryPath = "/api/category";
     this.authPath = "/api/auth";
     this.adminPath = "/api/admin";
+    this.origin =
+      process.env.NODE_ENV === "production"
+        ? "https://pool1541.github.io/e-commerce"
+        : "http://127.0.0.1:5173";
 
     this.connectDB();
     this.middlewares();
@@ -24,7 +28,12 @@ class Server {
   }
 
   middlewares() {
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        credentials: true,
+        origin: true,
+      })
+    );
     this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(express.static("public"));
