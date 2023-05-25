@@ -25,7 +25,7 @@ const UserSchema = Schema({
   },
   image: {
     type: String,
-    default: "",
+    default: "https://stonegatesl.com/wp-content/uploads/2021/01/avatar.jpg",
   },
   status: {
     type: Boolean,
