@@ -1,7 +1,7 @@
 const { request, response } = require("express");
 const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
-const { generateJWT } = require("../helpers/generateJWT");
+const { generateJWT, generateRefreshJWT } = require("../helpers/generateJWT");
 
 const getUserInfo = async (req = request, res = response) => {
   // TODO: Esta ruta es para usuarios normales
@@ -28,16 +28,26 @@ const createUser = async (req = request, res = response) => {
   // ✅Method : POST
   // ✅body : name, username, email, password | REQUERIDOS
   //          image | OPCIONAL
-  const { name, username, email, password, image } = req.body;
+  const { name, username, email, password } = req.body;
 
-  const user = new User({ name, username, email, password, image });
+  const user = new User({ name, username, email, password });
   const salt = bcryptjs.genSaltSync();
   user.password = bcryptjs.hashSync(password, salt);
 
   await user.save();
-  const token = await generateJWT(user.id);
+  const [token, refreshToken] = await Promise.all([
+    generateJWT(user.id),
+    generateRefreshJWT(user.id, res),
+  ]);
 
-  res.json({ message: "User created successfully", user, token });
+  res.json({
+    message: "User created successfully",
+    user,
+    stsTokenManager: {
+      ...token,
+      message: refreshToken,
+    },
+  });
 };
 
 const changePassword = async (req = request, res = response) => {
