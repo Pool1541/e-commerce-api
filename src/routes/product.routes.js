@@ -30,6 +30,7 @@ router.post(
       .withMessage("price is not a number"),
     check("image", "image is required").notEmpty(),
     check("category", "category is required").notEmpty().custom(categoryExists),
+    check("brand", "brand is required").notEmpty(),
     check("countInStock", "countInStock is required")
       .notEmpty()
       .isNumeric()

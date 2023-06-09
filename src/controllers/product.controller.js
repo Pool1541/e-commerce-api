@@ -2,14 +2,27 @@ const { request, response } = require("express");
 const Product = require("../models/product");
 
 const getProducts = async (req = request, res = response) => {
-  const { category, limit = 10, from = 0 } = req.query;
+  const { category, brand, maxPrice, limit = 20, from = 0 } = req.query;
+  // TODO: Los querys llegan en string, category=[] es un string: '[]'
+  function buildQuery(category = [], brand = [], maxPrice = 0) {
+    let query = {};
+    if (category.length > 0) query.category = { $in: JSON.parse(category) };
+    if (brand.length > 0) query.brand = { $in: JSON.parse(brand) };
+    if (maxPrice > 0) query.price = { $lte: Number(maxPrice) };
+    return query;
+  }
 
-  const query = category && { category };
-
-  const [count, products] = await Promise.all([
-    Product.countDocuments(query),
-    Product.find(query).skip(Number(from)).limit(Number(limit)),
+  const [count, products, categories, brands] = await Promise.all([
+    Product.countDocuments(buildQuery(category, brand, maxPrice)),
+    Product.find(buildQuery(category, brand, maxPrice))
+      .skip(Number(from))
+      .limit(Number(limit)),
+    Product.distinct("category"),
+    Product.distinct("brand"),
   ]);
+
+  // console.log(categories);
+  // console.log(brands);
 
   res.json({
     count,
@@ -24,7 +37,8 @@ const createProduct = async (req = request, res = response) => {
   // ✅Se debe establecer el token en los headers
   // ✅Se deben enviar correctamente las propiedades requeridas en el body
   // ✅body : title, description, price, image, category, countInStock | REQUERIDOS
-  const { title, description, price, image, category, countInStock } = req.body;
+  const { title, description, price, image, category, brand, countInStock } =
+    req.body;
 
   const product = new Product({
     title,
@@ -32,6 +46,7 @@ const createProduct = async (req = request, res = response) => {
     price,
     image,
     category,
+    brand,
     countInStock,
   });
 
