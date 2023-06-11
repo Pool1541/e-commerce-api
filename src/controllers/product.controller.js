@@ -4,12 +4,20 @@ const Product = require("../models/product");
 const getProducts = async (req = request, res = response) => {
   const { category, brand, maxPrice, limit = 20, from = 0 } = req.query;
   // TODO: Los querys llegan en string, category=[] es un string: '[]'
-  function buildQuery(category = [], brand = [], maxPrice = 0) {
-    let query = {};
-    if (category.length > 0) query.category = { $in: JSON.parse(category) };
-    if (brand.length > 0) query.brand = { $in: JSON.parse(brand) };
-    if (maxPrice > 0) query.price = { $lte: Number(maxPrice) };
-    return query;
+  function buildQuery(category = "", brand = "", maxPrice = 0) {
+    category = category && category.split(",");
+    brand = brand && brand.split(",");
+    maxPrice = Number(maxPrice);
+    try {
+      let query = {};
+      if (category.length > 0) query.category = { $in: category };
+      if (brand.length > 0) query.brand = { $in: brand };
+      if (maxPrice > 0) query.price = { $lte: maxPrice };
+      console.log(query);
+      return query;
+    } catch (error) {
+      return null;
+    }
   }
 
   const [count, products, categories, brands] = await Promise.all([
