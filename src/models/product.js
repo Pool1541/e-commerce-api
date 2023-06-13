@@ -33,7 +33,8 @@ const ProducthSchema = new Schema({
 });
 
 ProducthSchema.methods.toJSON = function () {
-  const { __v, ...rest } = this.toObject();
+  const { __v, _id, ...rest } = this.toObject();
+  rest.id = _id;
   return rest;
 };
 

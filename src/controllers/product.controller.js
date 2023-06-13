@@ -3,7 +3,7 @@ const Product = require("../models/product");
 
 const getProducts = async (req = request, res = response) => {
   const { category, brand, maxPrice, limit = 20, from = 0 } = req.query;
-  // TODO: Los querys llegan en string, category=[] es un string: '[]'
+
   function buildQuery(category = "", brand = "", maxPrice = 0) {
     category = category && category.split(",");
     brand = brand && brand.split(",");
@@ -13,7 +13,6 @@ const getProducts = async (req = request, res = response) => {
       if (category.length > 0) query.category = { $in: category };
       if (brand.length > 0) query.brand = { $in: brand };
       if (maxPrice > 0) query.price = { $lte: maxPrice };
-      console.log(query);
       return query;
     } catch (error) {
       return null;
@@ -36,6 +35,23 @@ const getProducts = async (req = request, res = response) => {
     count,
     products,
   });
+};
+
+const getProductById = async (req = request, res = response) => {
+  const { id } = req.params;
+
+  // TODO: Validar que sea un id válido de moongose
+  try {
+    const product = await Product.findById(id);
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404).json({ error: "Product not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Something went Wrong" });
+  }
 };
 
 const createProduct = async (req = request, res = response) => {
@@ -98,4 +114,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductById,
 };

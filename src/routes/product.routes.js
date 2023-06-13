@@ -5,6 +5,7 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductById,
 } = require("../controllers/product.controller");
 const {
   productTitleExists,
@@ -17,6 +18,7 @@ const { hasRole } = require("../middlewares/validateRole");
 const router = Router();
 
 router.get("/", getProducts);
+router.get("/:id", getProductById);
 router.post(
   "/",
   [
