@@ -7,6 +7,7 @@ const productRouter = require("../routes/product.routes");
 const categoryRouter = require("../routes/category.routes");
 const authRouter = require("../routes/auth.routes");
 const adminRouter = require("../routes/admin.routes");
+const filterRuter = require("../routes/filter.routes");
 
 class Server {
   constructor() {
@@ -17,6 +18,7 @@ class Server {
     this.categoryPath = "/api/category";
     this.authPath = "/api/auth";
     this.adminPath = "/api/admin";
+    this.filterPath = "/api/filters";
     this.origin =
       process.env.NODE_ENV === "production"
         ? "https://pool1541.github.io/e-commerce"
@@ -49,6 +51,7 @@ class Server {
     this.app.use(this.userPath, userRouter);
     this.app.use(this.productPath, productRouter);
     this.app.use(this.categoryPath, categoryRouter);
+    this.app.use(this.filterPath, filterRuter);
   }
 
   start() {
