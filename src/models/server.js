@@ -1,28 +1,24 @@
-const express = require("express");
-const cors = require("cors");
-const dbConnection = require("../database/config");
-const cookieParser = require("cookie-parser");
-const userRouter = require("../routes/user.routes");
-const productRouter = require("../routes/product.routes");
-const categoryRouter = require("../routes/category.routes");
-const authRouter = require("../routes/auth.routes");
-const adminRouter = require("../routes/admin.routes");
-const filterRuter = require("../routes/filter.routes");
+const express = require('express');
+const cors = require('cors');
+const dbConnection = require('../database/config');
+const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 
 class Server {
   constructor() {
     this.app = express();
     this.PORT = process.env.PORT || 8080;
-    this.userPath = "/api/users";
-    this.productPath = "/api/products";
-    this.categoryPath = "/api/category";
-    this.authPath = "/api/auth";
-    this.adminPath = "/api/admin";
-    this.filterPath = "/api/filters";
+    this.userPath = '/api/users';
+    this.productPath = '/api/products';
+    this.categoryPath = '/api/category';
+    this.authPath = '/api/auth';
+    this.adminPath = '/api/admin';
+    this.filterPath = '/api/filters';
+    this.uploadsPath = '/api/uploads';
     this.origin =
-      process.env.NODE_ENV === "production"
-        ? "https://pool1541.github.io/e-commerce"
-        : "http://127.0.0.1:5173";
+      process.env.NODE_ENV === 'production'
+        ? 'https://pool1541.github.io/e-commerce'
+        : 'http://127.0.0.1:5173';
 
     this.connectDB();
     this.middlewares();
@@ -38,7 +34,13 @@ class Server {
     );
     this.app.use(cookieParser());
     this.app.use(express.json());
-    this.app.use(express.static("public"));
+    this.app.use(express.static('public'));
+    this.app.use(
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+      })
+    );
   }
 
   async connectDB() {
@@ -46,18 +48,17 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.authPath, authRouter);
-    this.app.use(this.adminPath, adminRouter);
-    this.app.use(this.userPath, userRouter);
-    this.app.use(this.productPath, productRouter);
-    this.app.use(this.categoryPath, categoryRouter);
-    this.app.use(this.filterPath, filterRuter);
+    this.app.use(this.authPath, require('../routes/auth.routes'));
+    this.app.use(this.adminPath, require('../routes/admin.routes'));
+    this.app.use(this.userPath, require('../routes/user.routes'));
+    this.app.use(this.productPath, require('../routes/product.routes'));
+    this.app.use(this.categoryPath, require('../routes/category.routes'));
+    this.app.use(this.filterPath, require('../routes/filter.routes'));
+    this.app.use(this.uploadsPath, require('../routes/upload.routes'));
   }
 
   start() {
-    this.app.listen(this.PORT, () =>
-      console.log("Running on port " + this.PORT)
-    );
+    this.app.listen(this.PORT, () => console.log('Running on port ' + this.PORT));
   }
 }
 

@@ -1,31 +1,33 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
+const path = require('path');
 
 const UserSchema = Schema({
   name: {
     type: String,
-    required: [true, "the name is required"],
+    required: [true, 'the name is required'],
   },
   username: {
     type: String,
-    required: [true, "the username is required"],
+    required: [true, 'the username is required'],
     unique: true,
   },
   email: {
     type: String,
-    required: [true, "the email is required"],
+    required: [true, 'the email is required'],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "the password is required"],
+    required: [true, 'the password is required'],
   },
   role: {
     type: String,
-    default: "USER",
+    default: 'USER',
   },
   image: {
     type: String,
-    default: "https://stonegatesl.com/wp-content/uploads/2021/01/avatar.jpg",
+    default:
+      'https://res.cloudinary.com/dj6kd6xui/image/upload/v1694712371/iynpbsfbjdclv4bvy36x.webp',
   },
   status: {
     type: Boolean,
@@ -39,4 +41,4 @@ UserSchema.methods.toJSON = function () {
   return rest;
 };
 
-module.exports = model("User", UserSchema);
+module.exports = model('User', UserSchema);
