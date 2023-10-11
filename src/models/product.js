@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require("mongoose");
+const { Schema, model, Types } = require('mongoose');
 
 const ProducthSchema = new Schema({
   title: {
@@ -7,7 +7,7 @@ const ProducthSchema = new Schema({
     unique: true,
   },
   description: {
-    type: String,
+    type: [String],
     required: true,
   },
   price: {
@@ -34,6 +34,14 @@ const ProducthSchema = new Schema({
     type: Number,
     required: true,
   },
+  sku: {
+    type: String,
+    required: true,
+  },
+  features: {
+    type: [String],
+    required: true,
+  },
 });
 
 ProducthSchema.methods.toJSON = function () {
@@ -42,4 +50,4 @@ ProducthSchema.methods.toJSON = function () {
   return rest;
 };
 
-module.exports = model("Product", ProducthSchema);
+module.exports = model('Product', ProducthSchema);
