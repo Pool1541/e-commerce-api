@@ -58,16 +58,33 @@ const createProduct = async (req = request, res = response) => {
   // ✅Se debe establecer el token en los headers
   // ✅Se deben enviar correctamente las propiedades requeridas en el body
   // ✅body : title, description, price, image, category, countInStock | REQUERIDOS
-  const { title, description, price, image, category, brand, countInStock } = req.body;
+  const {
+    title,
+    description,
+    features,
+    price,
+    fullPrice,
+    image,
+    category,
+    subCategory,
+    brand,
+    countInStock,
+    discount = 0,
+  } = req.body;
 
   const product = new Product({
     title,
     description,
+    features,
     price,
+    fullPrice,
     image,
     category,
     brand,
     countInStock,
+    discount,
+    sku,
+    subCategory,
   });
 
   await product.save();
