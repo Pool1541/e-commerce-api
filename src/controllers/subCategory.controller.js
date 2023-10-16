@@ -9,14 +9,21 @@ const getSubCategories = async (req = request, res = response) => {
 };
 
 const createSubCategory = async (req = request, res = response) => {
-  const { name, category } = req.body;
+  try {
+    const { name, category } = req.body;
 
-  const subCategory = new SubCategory({ name, category });
+    const subCategory = new SubCategory({ name, category });
 
-  await subCategory.save();
-  res.json({
-    message: `${name} subcategory created successfully`,
-  });
+    await subCategory.save();
+    res.json({
+      message: `${name} subcategory created successfully`,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      errors: ['Ocurrió un error'],
+    });
+  }
 };
 
 module.exports = {
