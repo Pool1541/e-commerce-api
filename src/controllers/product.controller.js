@@ -2,15 +2,16 @@ const { request, response } = require('express');
 const Product = require('../models/product');
 
 const getProducts = async (req = request, res = response) => {
-  const { category, brand, maxPrice, limit = 20, from = 0 } = req.query;
+  const { category, subCategory, brand, maxPrice, limit = 20, from = 0 } = req.query;
 
-  function buildQuery(category = '', brand = '', maxPrice = 0) {
-    category = category && category.split(',');
+  function buildQuery(category = '', subCategory = '', brand = '', maxPrice = 0) {
+    subCategory = subCategory && subCategory.split(',');
     brand = brand && brand.split(',');
     maxPrice = Number(maxPrice);
     try {
       let query = {};
-      if (category.length > 0) query.category = { $in: category };
+      if (category) query.category = { $in: category };
+      if (subCategory.length > 0) query.subCategory = { $in: subCategory };
       if (brand.length > 0) query.brand = { $in: brand };
       if (maxPrice > 0) query.price = { $lte: maxPrice };
       return query;
@@ -21,8 +22,10 @@ const getProducts = async (req = request, res = response) => {
 
   try {
     const [count, products] = await Promise.all([
-      Product.countDocuments(buildQuery(category, brand, maxPrice)),
-      Product.find(buildQuery(category, brand, maxPrice)).skip(Number(from)).limit(Number(limit)),
+      Product.countDocuments(buildQuery(category, subCategory, brand, maxPrice)),
+      Product.find(buildQuery(category, subCategory, brand, maxPrice))
+        .skip(Number(from))
+        .limit(Number(limit)),
     ]);
 
     res.json({
