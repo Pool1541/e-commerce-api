@@ -2,7 +2,9 @@ const { request, response } = require('express');
 const Product = require('../models/product');
 
 const getProducts = async (req = request, res = response) => {
-  const { category, subCategory, brand, maxPrice, limit = 20, from = 0 } = req.query;
+  const { category, subCategory, brand, maxPrice, limit = 20, from = 0, sort } = req.query;
+
+  const sortByPrice = sort && { price: sort };
 
   function buildQuery(category = '', subCategory = '', brand = '', maxPrice = 0) {
     subCategory = subCategory && subCategory.split(',');
@@ -25,7 +27,8 @@ const getProducts = async (req = request, res = response) => {
       Product.countDocuments(buildQuery(category, subCategory, brand, maxPrice)),
       Product.find(buildQuery(category, subCategory, brand, maxPrice))
         .skip(Number(from))
-        .limit(Number(limit)),
+        .limit(Number(limit))
+        .sort(sortByPrice),
     ]);
 
     res.json({
