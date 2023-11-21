@@ -1,7 +1,7 @@
-const { request, response } = require("express");
-const User = require("../models/user");
-const bcryptjs = require("bcryptjs");
-const { generateJWT, generateRefreshJWT } = require("../helpers/generateJWT");
+const { request, response } = require('express');
+const User = require('../models/user');
+const bcryptjs = require('bcryptjs');
+const { generateJWT, generateRefreshJWT } = require('../helpers/generateJWT');
 
 const getUserInfo = async (req = request, res = response) => {
   // TODO: Esta ruta es para usuarios normales
@@ -41,7 +41,7 @@ const createUser = async (req = request, res = response) => {
   ]);
 
   res.json({
-    message: "User created successfully",
+    message: 'User created successfully',
     user,
     stsTokenManager: {
       ...token,
@@ -66,12 +66,16 @@ const changePassword = async (req = request, res = response) => {
   await User.findByIdAndUpdate(id, { password: newPassword });
 
   res.json({
-    message: "Password has been changed successfully.",
+    message: 'Password has been changed successfully.',
   });
 };
 
-const changeUser = (req = request, res = response) => {
-  res.json({ message: "Put method from user controller" });
+const updateUser = async (req = request, res = response) => {
+  const { name, username } = req.body;
+  const { id } = req.params;
+
+  const user = await User.findByIdAndUpdate(id, { name, username }, { new: true });
+  res.json({ user });
 };
 
 const deleteUser = async (req = request, res = response) => {
@@ -92,6 +96,6 @@ module.exports = {
   getUserInfo,
   createUser,
   changePassword,
-  changeUser,
+  updateUser,
   deleteUser,
 };
