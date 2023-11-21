@@ -39,6 +39,12 @@ const usernameExists = async (username = '') => {
   }
 };
 
+const usernameIsDifferentAndExist = async (value, { req }) => {
+  if (value !== req.user.username) {
+    return await usernameExists(value);
+  }
+};
+
 const categoryExists = async (name = '') => {
   const categoryExists = await Category.findOne({ name });
   if (!categoryExists) {
@@ -67,6 +73,7 @@ module.exports = {
   emailExists,
   usernameExists,
   userExist,
+  usernameIsDifferentAndExist,
   productExist,
   categoryExists,
   productTitleExists,
