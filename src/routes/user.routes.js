@@ -13,6 +13,8 @@ const {
   usernameExists,
   userExist,
   usernameIsDifferentAndExist,
+  confirmPassword,
+  isValidPassword,
 } = require('../helpers/db-validations');
 const { validateJWT } = require('../middlewares/validateJWT');
 const { validateOwnerUser } = require('../middlewares/validateOwnerUser');
@@ -61,9 +63,18 @@ router.patch(
   '/:id',
   [
     validateJWT,
-    check('password', 'password need more than 6 characters').isLength({
-      min: 7,
-    }),
+    check('current_password', 'error on current_password')
+      .notEmpty()
+      .withMessage('current_password is required')
+      .custom(isValidPassword),
+    check('new_password', 'new_password is required')
+      .notEmpty()
+      .isLength({ min: 7 })
+      .withMessage('new_password need more than 6 characters'),
+    check('confirm_password')
+      .notEmpty()
+      .withMessage('confirm_password is required')
+      .custom(confirmPassword),
     check('id').isMongoId().custom(userExist),
     validateInputs,
     validateOwnerUser,
