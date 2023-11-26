@@ -53,15 +53,18 @@ const createUser = async (req = request, res = response) => {
 const changePassword = async (req = request, res = response) => {
   // TODO - Para que un usuario cambie su contraseña necesita :
   // ✅Logearse con su cuenta y obtener un token válido
-  // ✅Solicitar la eliminación de la cuenta a través del endpoint y el método correcto
-  // ✅Enviar a través de la solicitud http tanto el uid en los parámetros como el token en los headers
+  // ✅Solicitar el cambio de contraseña a través del endpoint y el método correcto
+  // ✅Enviar el el token en los headers
+  // ✅Enviar las propiedades current_password, new_password y confirm_password en el body
   // ✅El uid que contiene el payload del token debe ser el mismo que el uid del parámetro en la solicitud http
-  // Solicitar la contraseña anterior como validación adicional.
-  const { password } = req.body;
+  // ✅La propiedad current_password y el password de la cuenta deben hacer match
+  // ✅Las propiedades new_password y confirm_password deben ser exáctamente iguales
+
+  const { new_password } = req.body;
   const { id } = req.params;
 
   const salt = bcryptjs.genSaltSync();
-  const newPassword = bcryptjs.hashSync(password, salt);
+  const newPassword = bcryptjs.hashSync(new_password, salt);
 
   await User.findByIdAndUpdate(id, { password: newPassword });
 
