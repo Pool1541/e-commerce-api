@@ -1,6 +1,7 @@
 const Category = require('../models/category');
 const Product = require('../models/product');
 const User = require('../models/user');
+const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
 
 const userExist = async (id = '') => {
@@ -69,6 +70,20 @@ const isAllowedCollection = (collection = '', allowedCollectionsArray = []) => {
   return true;
 };
 
+const confirmPassword = (value, { req }) => {
+  if (value !== req.body.new_password) {
+    throw new Error('Passwords do not match');
+  }
+
+  return true;
+};
+
+const isValidPassword = async (value, { req }) => {
+  const isValid = bcryptjs.compareSync(value, req.user.password);
+
+  if (!isValid) throw new Error('Wrong password');
+};
+
 module.exports = {
   emailExists,
   usernameExists,
@@ -78,4 +93,6 @@ module.exports = {
   categoryExists,
   productTitleExists,
   isAllowedCollection,
+  confirmPassword,
+  isValidPassword,
 };
