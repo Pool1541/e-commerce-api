@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  # mongo:
+  #   image: mongo
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: admin_super_cafe
+  #     MONGO_INITDB_ROOT_PASSWORD: WES2twAKsvdpIztf
+
+  ecommerce-api:
+    container_name: ecommerce-api
+    build: .
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      MONGODB_CONNECTION: mongodb+srv://admin_super_cafe:WES2twAKsvdpIztf@super-cafe.n2exoxv.mongodb.net/e-commerce
+      PRIVATE_KEY: LASDLFO2392kfawlf0af023041231kdf
+      PRIVATE_REFRESH_KEY: LASDLFO239kdf
+      NODE_ENV: development
+      CLOUDINARY_URL: cloudinary://123567557617241:5O2soY5X-azaWlDf4mEzGpFeIRY@dj6kd6xui
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     image: ecommerce-api
+#     ports:
+#       - "3000:3000"
+#     links:
+#       - mongodb
+
+#   mongodb:
+#     image: mongo
+#     ports:
+#       - "27017:27017"
