@@ -3,11 +3,11 @@ const { Schema, model } = require('mongoose');
 const PaymentMethodSchema = new Schema({
   cardName: {
     type: String,
-    unique: true,
     required: true,
   },
   cardNumber: {
     type: Number,
+    unique: true,
     required: true,
   },
   expirationDate: {
