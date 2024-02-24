@@ -84,6 +84,15 @@ const isValidPassword = async (value, { req }) => {
   if (!isValid) throw new Error('Wrong password');
 };
 
+const isValidCreditCard = (cardNumber = '') => {
+  const firstNumbersOfValidCards = ['3', '4', '5'];
+  for (let i = 0; i < firstNumbersOfValidCards.length; i++) {
+    if (cardNumber.startsWith(firstNumbersOfValidCards[i])) return true;
+  }
+
+  throw new Error('Invalid card number');
+};
+
 module.exports = {
   emailExists,
   usernameExists,
@@ -95,4 +104,5 @@ module.exports = {
   isAllowedCollection,
   confirmPassword,
   isValidPassword,
+  isValidCreditCard,
 };
