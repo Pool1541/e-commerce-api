@@ -6,7 +6,7 @@ const PaymentMethodSchema = new Schema({
     required: true,
   },
   cardNumber: {
-    type: Number,
+    type: String,
     unique: true,
     required: true,
   },
@@ -15,7 +15,7 @@ const PaymentMethodSchema = new Schema({
     required: true,
   },
   securityCode: {
-    type: Number,
+    type: String,
     required: true,
   },
   user: {
