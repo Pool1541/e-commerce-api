@@ -1,5 +1,6 @@
 const { request, response } = require('express');
 const PaymentMethod = require('../models/payment-method');
+const { encryptData } = require('../helpers/encryptData');
 
 const getPaymentMethodsByUser = (req = request, res = response) => {};
 
@@ -25,11 +26,13 @@ const createPaymentMethod = async (req = request, res = response) => {
   const { cardName, cardNumber, expirationDate, securityCode, user } = req.body;
 
   try {
+    const [cipherCardNumber, cipherSecurityCode] = encryptData([cardNumber, securityCode]);
+
     const paymentMethod = new PaymentMethod({
       cardName,
-      cardNumber,
+      cardNumber: cipherCardNumber,
       expirationDate,
-      securityCode,
+      securityCode: cipherSecurityCode,
       user,
     });
 
@@ -39,6 +42,7 @@ const createPaymentMethod = async (req = request, res = response) => {
       data: 'PaymentMethod created succesfuly',
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       error: ['Something went wrong'],
     });
