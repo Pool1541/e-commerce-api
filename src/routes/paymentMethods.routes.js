@@ -9,20 +9,10 @@ const { check } = require('express-validator');
 const validateInputs = require('../middlewares/validateInputs');
 const { validateJWT } = require('../middlewares/validateJWT');
 const { userExist, isValidCreditCard } = require('../helpers/db-validations');
-const { validateOwnerUser } = require('../middlewares/validateOwnerUser');
 
 const router = Router();
 
-router.get(
-  '/',
-  [
-    validateJWT,
-    check('id').isMongoId().withMessage('id is not valid').custom(userExist),
-    validateInputs,
-    validateOwnerUser,
-  ],
-  getPaymentMethodsByUser
-);
+router.get('/', validateJWT, getPaymentMethodsByUser);
 
 /**
  * Antes de retornar los datos, validar que el id extraído del jwt sea el mismo que el id de usuario del método de pago con el que se va a interactuar.
