@@ -1,4 +1,5 @@
 const { AES, enc } = require('crypto-js');
+const { hideCardNumber } = require('./hideCardNumber');
 
 const encryptData = (data = []) => {
   try {
@@ -22,7 +23,24 @@ const decryptData = (data = []) => {
   }
 };
 
+const decryptCards = (data) => {
+  const decryptCardNumber = (value) => hideCardNumber(decryptData([value])[0]);
+
+  if (data instanceof Array)
+    return data.map((value) => ({
+      ...value,
+      cardNumber: decryptCardNumber(value.cardNumber),
+    }));
+  if (data instanceof Object)
+    return {
+      ...data,
+      cardNumber: decryptCardNumber(data.cardNumber),
+    };
+  else throw new Error('Invalid data type');
+};
+
 module.exports = {
   encryptData,
   decryptData,
+  decryptCards,
 };
