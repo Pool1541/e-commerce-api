@@ -1,15 +1,38 @@
 const { request, response } = require('express');
 const PaymentMethod = require('../models/payment-method');
-const { encryptData, decryptData } = require('../helpers/crypto');
+const { encryptData, decryptData, decryptCards } = require('../helpers/crypto');
 const { hideCardNumber } = require('../helpers/hideCardNumber');
 
-const getPaymentMethodsByUser = (req = request, res = response) => {};
+const getPaymentMethodsByUser = async (req = request, res = response) => {
+  const { _id: id } = req.user;
+
+  try {
+    const paymentMethods = await PaymentMethod.find({ user: id });
+
+    if (paymentMethods.length === 0) return res.status(200).json({ data: [] });
+
+    const decryptedCards = decryptCards(
+      paymentMethods.map(({ cardNumber, _id, expirationDate }) => ({
+        _id,
+        cardNumber,
+        expirationDate,
+      }))
+    );
+
+    return res.status(200).json({
+      data: decryptedCards,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: ['Something went wrong'] });
+  }
+};
 
 const getPaymentMethod = async (req = request, res = response) => {
-  try {
-    const { id } = req.params;
-    const { _id: uid } = req.user;
+  const { id } = req.params;
+  const { _id: uid } = req.user;
 
+  try {
     const paymentMethod = await PaymentMethod.findById(id);
 
     if (!paymentMethod) return res.status(404).json({ error: ['Payment method not found'] });
@@ -18,15 +41,10 @@ const getPaymentMethod = async (req = request, res = response) => {
       return res.status(401).json({ error: ['Not authorized'] });
 
     let { _id, cardNumber, expirationDate } = paymentMethod;
-
-    cardNumber = hideCardNumber(decryptData([cardNumber])[0]);
+    const decryptedCard = decryptCards({ _id, cardNumber, expirationDate });
 
     return res.status(200).json({
-      data: {
-        _id,
-        cardNumber,
-        expirationDate,
-      },
+      data: decryptedCard,
     });
   } catch (error) {
     console.log(error);
@@ -62,10 +80,10 @@ const createPaymentMethod = async (req = request, res = response) => {
 };
 
 const deletePaymentMethod = async (req = request, res = response) => {
-  try {
-    const { id } = req.params;
-    const { _id: uid } = req.user;
+  const { id } = req.params;
+  const { _id: uid } = req.user;
 
+  try {
     const paymentMethod = await PaymentMethod.findById(id);
     if (!paymentMethod) return res.status(404).json({ error: ['Payment method not found'] });
 
