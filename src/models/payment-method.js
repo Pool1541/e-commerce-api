@@ -22,6 +22,10 @@ const PaymentMethodSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  hash: {
+    type: String,
+    require: true,
+  },
 });
 
 module.exports = model('PaymentMethod', PaymentMethodSchema);
