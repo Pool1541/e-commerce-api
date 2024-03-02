@@ -2,6 +2,7 @@ const { request, response } = require('express');
 const PaymentMethod = require('../models/payment-method');
 const { encryptData, decryptData, decryptCards } = require('../helpers/crypto');
 const { hideCardNumber } = require('../helpers/hideCardNumber');
+const { createHash } = require('../helpers/createHash');
 
 const getPaymentMethodsByUser = async (req = request, res = response) => {
   const { _id: id } = req.user;
@@ -58,12 +59,20 @@ const createPaymentMethod = async (req = request, res = response) => {
   try {
     const [cipherCardNumber, cipherSecurityCode] = encryptData([cardNumber, securityCode]);
 
+    const hash = createHash(cardNumber, expirationDate);
+
+    const paymentMethodExists = await PaymentMethod.findOne({ hash, user });
+
+    if (paymentMethodExists)
+      return res.status(400).json({ error: ['Payment method already exists'] });
+
     const paymentMethod = new PaymentMethod({
       cardName,
       cardNumber: cipherCardNumber,
       expirationDate,
       securityCode: cipherSecurityCode,
       user,
+      hash,
     });
 
     await paymentMethod.save();
