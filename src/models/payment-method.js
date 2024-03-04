@@ -21,6 +21,7 @@ const PaymentMethodSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   hash: {
     type: String,
