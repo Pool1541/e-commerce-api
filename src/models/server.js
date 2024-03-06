@@ -18,6 +18,7 @@ class Server {
     this.subCategoryPath = '/api/subcategories';
     this.searchPath = '/api/search';
     this.paymentMethodsPath = '/api/paymentMethods';
+    this.addressPath = '/api/address';
     this.origin =
       process.env.NODE_ENV === 'production'
         ? 'https://pool1541.github.io/e-commerce'
@@ -61,6 +62,7 @@ class Server {
     this.app.use(this.subCategoryPath, require('../routes/subCategory.routes'));
     this.app.use(this.searchPath, require('../routes/search.routes'));
     this.app.use(this.paymentMethodsPath, require('../routes/paymentMethods.routes'));
+    this.app.use(this.addressPath, require('../routes/address.routes'));
   }
 
   start() {
