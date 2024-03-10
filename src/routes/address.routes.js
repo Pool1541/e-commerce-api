@@ -1,5 +1,10 @@
 const { Router } = require('express');
-const { getAddress, createAddress, updateAddress } = require('../controllers/address.controller');
+const {
+  getAddress,
+  createAddress,
+  updateAddress,
+  deleteAddress,
+} = require('../controllers/address.controller');
 const { check } = require('express-validator');
 
 const { validateJWT } = require('../middlewares/validateJWT');
@@ -196,6 +201,16 @@ router.patch(
     validateInputs,
   ],
   updateAddress
+);
+
+router.delete(
+  '/:id',
+  [
+    validateJWT,
+    check('id').notEmpty().withMessage('id is required').isMongoId().withMessage('id is not valid'),
+    validateInputs,
+  ],
+  deleteAddress
 );
 
 module.exports = router;
