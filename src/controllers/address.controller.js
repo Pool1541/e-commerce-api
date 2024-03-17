@@ -1,11 +1,24 @@
 const { request, response } = require('express');
 const Address = require('../models/address');
 
-const getAddress = (req = request, res = response) => {
-  const {} = req.body;
-  return res.status(200).json({
-    message: 'Get Address',
-  });
+const getAddress = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+    const { _id: uid } = req.user;
+
+    const address = await Address.findOne({ user: id });
+
+    if (!address) return res.status(200).json({ data: null });
+    if (uid.toString() !== id.toString())
+      return res.status(401).json({ error: ['Not authorized'] });
+
+    return res.status(200).json({
+      data: address,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: ['Something went wrong'] });
+  }
 };
 
 const createAddress = async (req = request, res = response) => {
