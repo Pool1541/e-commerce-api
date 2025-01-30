@@ -1,10 +1,12 @@
 const { response } = require('express');
-const User = require('../models/user');
-const path = require('path');
-const product = require('../models/product');
 const cloudinary = require('cloudinary').v2;
+const path = require('path');
+const User = require('../models/user');
+const product = require('../models/product');
+const { CLOUDINARY_URL } = require('../helpers/environment');
 
-cloudinary.config(process.env.CLOUDINARY_URL);
+
+cloudinary.config(CLOUDINARY_URL);
 
 const sendImage = async (req, res = response) => {
   // Validar el token de usuario para acceder a su información.

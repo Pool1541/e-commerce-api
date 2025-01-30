@@ -1,8 +1,9 @@
 const { request, response } = require("express");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const bcryptjs = require("bcryptjs");
 const { generateJWT, generateRefreshJWT } = require("../helpers/generateJWT");
+const { PRIVATE_REFRESH_KEY } = require("../helpers/environment");
 
 const login = async (req = request, res = response) => {
   const { email, password } = req.body;
@@ -52,7 +53,7 @@ const sendNewAuthToken = async (req, res) => {
 
     const { uid } = jwt.verify(
       refreshTokenByCookie,
-      process.env.PRIVATE_REFRESH_KEY
+      PRIVATE_REFRESH_KEY
     );
 
     const { token, expiresIn } = await generateJWT(uid);

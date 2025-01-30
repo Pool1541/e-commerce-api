@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { PRIVATE_KEY, PRIVATE_REFRESH_KEY } = require("../helpers/environment");
 
 const generateJWT = (uid = "") => {
   return new Promise((resolve, reject) => {
@@ -6,7 +7,7 @@ const generateJWT = (uid = "") => {
     const expiresIn = 60 * 15;
     jwt.sign(
       payload,
-      process.env.PRIVATE_KEY,
+      PRIVATE_KEY,
       { expiresIn },
       (error, token) => {
         if (error) {
@@ -26,7 +27,7 @@ const generateRefreshJWT = (uid = "", res) => {
     const expiresIn = 60 * 60 * 24 * 30;
     jwt.sign(
       payload,
-      process.env.PRIVATE_REFRESH_KEY,
+      PRIVATE_REFRESH_KEY,
       { expiresIn },
       (error, token) => {
         if (error) {
