@@ -1,54 +1,53 @@
-# **E-commerce API**
+# E-MPORIUM API
 
-## Endpoints para el super administrador
+API RESTful para una plataforma de comercio electrónico construida con Node.js, Express y MongoDB.
 
-`/api/admin`
+## 🚀 Características
 
-- ✅ GET - para solicitar los usuarios registrados. [Se require jwt y rol de super administrador]
-- ✅ POST - para crear usuarios con privilegios de administrador. [Se require jwt y rol de super administrador]
-- ⌛ PATCH - para modificar datos de cualquier usuario. [Se require jwt y rol de super administrador]
-- ⌛ DELETE - para borrar/desactivar cualquier usuario. [Se require jwt y rol de super administrador]
+- Autenticación JWT
+- CRUD de productos
+- Gestión de usuarios
+- Carga de imágenes con Cloudinary
 
----
+## 🛠️ Tecnologías
 
-## Endpoints para administradores
+- Node.js
+- Express
+- MongoDB
+- Docker
+- JWT
+- Cloudinary
 
-`/api/products`
+## 📋 Requisitos Previos
 
-- ✅ POST - para crear productos. [Se require jwt y rol de administrador]
-- ⏳ PATCH - para modificar productos. [Se require jwt y rol de administrador]
-- ✅ DELETE - para eliminar productos. [Se require jwt y rol de administrador]
+- Docker
+- Docker Compose
+- Node.js (desarrollo local)
+- Cuenta en Cloudinary
 
----
+## 🔧 Instalación y Ejecución con Docker
 
-## Endpoints para usuarios
+1. Clonar el repositorio.
 
-`/api/users`
+2. Crear un archivo `.env.docker` en la raíz del proyecto con las siguientes variables de entorno:
 
-- ✅ GET - para solicitar sus propios datos. [Se require uid y jwt]
-- ✅ POST - para registrarse en la aplicación.
-- ✅ PATCH - para cambiar su propia contraseña. [Se require uid y jwt]
-- ✅ DELETE - para desactivar su propia cuenta. [Se require uid y jwt]
+```env
+PORT=3000
+PRIVATE_KEY=SECRET
+PRIVATE_REFRESH_KEY=SECRET
+NODE_ENV=production
+FRONTEND_URL=http://localhost:5432
+CLOUDINARY_URL=cloudinary://api-key:api-secret@cloud-name
+CRYPTO_SECRET_KEY=SECRET
 
-`/api/products`
+MONGO_INITDB_DATABASE=e-mporium
+MONGO_INITDB_ROOT_USERNAME=admin
+MONGO_INITDB_ROOT_PASSWORD=123456
+MONGODB_CONNECTION=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb/${MONGO_INITDB_DATABASE}
+```
 
-- ⌛ patch para cambiar el stock del producto. [Solo cuando se complete una compra]
+3. Ejecutar el siguiente comando:
 
----
-
-## endpoints públicos
-
-- ✅ GET - para solicitar los productos. [Público pero controlado por cors]
-
-## TODO
-
-**_Token de autorización_**: 15 minutos de duración.<br>
-**_Refresh token_**: 30 días de duración.
-
-- Insertar refresh Token vía cookies con una duración de 30 días cada vez que el usuario se registre o inicie sesión.
-- El frontend no debe guardar el token de autorización en el navegador (localStorage, sessionStorage, cookies).
-- Cada vez que el frontend solicite acceder a un endpoint protegido debe enviar el token de autorización mediante los headers.
-- Solo si el token de autorización ha expirado, se debe solicitar un nuevo token de autorización mediante el refresh token, enviandolo en una solicitud http al endpoint de refresh correspondiente, si el refresh token es válido, el servidor responderá con un nuevo token de autorización.
-- Si el refresh token está vencido o no es válido, se debe solicitar al usuario volver a iniciar sesión para obtener un nuevo refresh token.
-- Se debe crear un endpoint para el cierre de sesión.
-- Cuando el frontend solicite acceder a ese endpoint(cierre de sesión), desde el backend se borrará la cookie que contiene el refresh token.
+```bash
+docker compose --env-file .env.docker up
+```
