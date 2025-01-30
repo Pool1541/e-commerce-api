@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose");
 
-const RoleSchema = Schema({
+const RoleSchema = new Schema({
   role: {
-    typeof: "string",
-    require: [true, "role is required"],
+    type: String,
+    required: [true, "role is required"],
   },
 });
 
