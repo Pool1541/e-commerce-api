@@ -1,0 +1,50 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Logs
+logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+dist
+build
+
+# Dependency directories
+jspm_packages
+
+# Environment variables
+.env*
+
+# Miscellaneous
+.DS_Store
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose*.yml
+docker-compose*.yaml
+
+# IDE specific files
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+
+scripts
+README.md
+
+e-commerce.original-*.json
