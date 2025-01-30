@@ -2,11 +2,11 @@ const { request, response } = require('express');
 const Product = require('../models/product');
 
 const getProducts = async (req = request, res = response) => {
-  const { category, subCategory, brand, maxPrice, limit = 20, from = 0, sort } = req.query;
+  const { category, subCategory, brand, maxPrice, limit = 20, from = 0, sort, keyword } = req.query;
 
   const sortByPrice = sort && { price: sort };
 
-  function buildQuery(category = '', subCategory = '', brand = '', maxPrice = 0) {
+  function buildQuery(category = '', subCategory = '', brand = '', maxPrice = 0, keyword = '') {
     subCategory = subCategory && subCategory.split(',');
     brand = brand && brand.split(',');
     maxPrice = Number(maxPrice);
@@ -16,6 +16,12 @@ const getProducts = async (req = request, res = response) => {
       if (subCategory.length > 0) query.subCategory = { $in: subCategory };
       if (brand.length > 0) query.brand = { $in: brand };
       if (maxPrice > 0) query.price = { $lte: maxPrice };
+      if (keyword) {
+        query.$or = [
+          { title: { $regex: keyword, $options: 'i' } },
+          { brand: { $regex: keyword, $options: 'i' } }
+        ];
+      }
       return query;
     } catch (error) {
       return null;
@@ -24,8 +30,8 @@ const getProducts = async (req = request, res = response) => {
 
   try {
     const [count, products] = await Promise.all([
-      Product.countDocuments(buildQuery(category, subCategory, brand, maxPrice)),
-      Product.find(buildQuery(category, subCategory, brand, maxPrice))
+      Product.countDocuments(buildQuery(category, subCategory, brand, maxPrice, keyword)),
+      Product.find(buildQuery(category, subCategory, brand, maxPrice, keyword))
         .skip(Number(from))
         .limit(Number(limit))
         .sort(sortByPrice),
