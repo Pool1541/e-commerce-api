@@ -1,0 +1,490 @@
+[{
+  "_id": {
+    "$oid": "652b8606ac7ef2fab57916e1"
+  },
+  "name": "parlantes-bluetooth-de-mesa",
+  "category": {
+    "$oid": "6527440d667a54c7c73d21e9"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652b8606ac7ef2fab57916df"
+  },
+  "name": "parlantes-de-torre",
+  "category": {
+    "$oid": "6527440d667a54c7c73d21e9"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652b8606ac7ef2fab57916dd"
+  },
+  "name": "parlantes-portátiles-bluetooth",
+  "category": {
+    "$oid": "6527440d667a54c7c73d21e9"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652b8606ac7ef2fab57916e3"
+  },
+  "name": "parlantes-para-auto",
+  "category": {
+    "$oid": "6527440d667a54c7c73d21e9"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1d885f8e9b1a622c5c82"
+  },
+  "name": "sillas-gamer",
+  "category": {
+    "$oid": "652c1d305f8e9b1a622c5c7c"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1d885f8e9b1a622c5c86"
+  },
+  "name": "escritorios",
+  "category": {
+    "$oid": "652c1d305f8e9b1a622c5c7c"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1d885f8e9b1a622c5c84"
+  },
+  "name": "mesas-gamer",
+  "category": {
+    "$oid": "652c1d305f8e9b1a622c5c7c"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c8d"
+  },
+  "name": "tarjetas-de-vídeo",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c8f"
+  },
+  "name": "discos-internos-y-ssd",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c91"
+  },
+  "name": "placas-madres",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c97"
+  },
+  "name": "fuentes-de-poder",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c99"
+  },
+  "name": "sistemas-de-enfriamiento-y-ventiladores",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c9b"
+  },
+  "name": "complementos",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c9d"
+  },
+  "name": "cases-de-pc",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c9f"
+  },
+  "name": "cables-de-poder",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5ca1"
+  },
+  "name": "cpu-completo",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c93"
+  },
+  "name": "procesadores",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1df55f8e9b1a622c5c95"
+  },
+  "name": "memorias-ram",
+  "category": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c20aa5f8e9b1a622c5ca8"
+  },
+  "name": "cámaras-mirrorles",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c20aa5f8e9b1a622c5cac"
+  },
+  "name": "cámaras-compactas",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c20aa5f8e9b1a622c5caa"
+  },
+  "name": "cámaras-dsrl",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c25412d1012445dfa943e"
+  },
+  "name": "micrófonos",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c25412d1012445dfa9442"
+  },
+  "name": "lentes",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c25412d1012445dfa9440"
+  },
+  "name": "filtros",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c25412d1012445dfa9444"
+  },
+  "name": "otros",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c25412d1012445dfa943c"
+  },
+  "name": "maletines-mochilas-y-estuches",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c25412d1012445dfa943a"
+  },
+  "name": "fondos",
+  "category": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa944b"
+  },
+  "name": "celulares",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa944f"
+  },
+  "name": "smartwatch",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa944d"
+  },
+  "name": "cases-para-celulares",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9451"
+  },
+  "name": "bandas",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9453"
+  },
+  "name": "relojes-inteligentes",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9459"
+  },
+  "name": "bluetooth-in-ear",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa945b"
+  },
+  "name": "on-ear-con-micrófonos",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa945f"
+  },
+  "name": "true-wireless",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa945d"
+  },
+  "name": "cancelación-de-ruido",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9461"
+  },
+  "name": "on-ear-sin-micrófono",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9463"
+  },
+  "name": "cargadores-de-pared",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9465"
+  },
+  "name": "cargadores-inalámbricos",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9469"
+  },
+  "name": "cargadores-cargadores-para-smartwatch",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9467"
+  },
+  "name": "cargadores-para-auto",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa946b"
+  },
+  "name": "cargadores-adaptadores",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9455"
+  },
+  "name": "in-ear-con-micrófono",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6d6b2d1012445dfa9457"
+  },
+  "name": "bluetooth-on-ear",
+  "category": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c72062d1012445dfa9472"
+  },
+  "name": "scooters-eléctricos",
+  "category": {
+    "$oid": "652c6f2b2d1012445dfa946d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c72062d1012445dfa9476"
+  },
+  "name": "bicicletas-eléctricas",
+  "category": {
+    "$oid": "652c6f2b2d1012445dfa946d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c72062d1012445dfa9474"
+  },
+  "name": "motos-eléctricas",
+  "category": {
+    "$oid": "652c6f2b2d1012445dfa946d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c95a72d1012445dfa947f"
+  },
+  "name": "videojuegos",
+  "category": {
+    "$oid": "652c74cf2d1012445dfa9478"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c95a72d1012445dfa947d"
+  },
+  "name": "consolas",
+  "category": {
+    "$oid": "652c74cf2d1012445dfa9478"
+  },
+  "__v": 0
+}]

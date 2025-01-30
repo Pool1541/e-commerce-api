@@ -3,11 +3,12 @@ const cors = require('cors');
 const dbConnection = require('../database/config');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const { PORT, FRONTEND_URL } = require('../helpers/environment');
 
 class Server {
   constructor() {
     this.app = express();
-    this.PORT = process.env.PORT || 8080;
+    this.PORT = PORT || 8080;
     this.userPath = '/api/users';
     this.productPath = '/api/products';
     this.categoryPath = '/api/category';
@@ -16,13 +17,10 @@ class Server {
     this.filterPath = '/api/filters';
     this.uploadsPath = '/api/uploads';
     this.subCategoryPath = '/api/subcategories';
-    this.searchPath = '/api/search';
     this.paymentMethodsPath = '/api/paymentMethods';
     this.addressPath = '/api/address';
-    this.origin =
-      process.env.NODE_ENV === 'production'
-        ? 'https://pool1541.github.io/e-commerce'
-        : 'http://127.0.0.1:5173';
+    this.seed = "/api/seed";
+    this.origin = FRONTEND_URL || 'http://localhost:3000';
 
     this.connectDB();
     this.middlewares();
@@ -60,9 +58,9 @@ class Server {
     this.app.use(this.filterPath, require('../routes/filter.routes'));
     this.app.use(this.uploadsPath, require('../routes/upload.routes'));
     this.app.use(this.subCategoryPath, require('../routes/subCategory.routes'));
-    this.app.use(this.searchPath, require('../routes/search.routes'));
     this.app.use(this.paymentMethodsPath, require('../routes/paymentMethods.routes'));
     this.app.use(this.addressPath, require('../routes/address.routes'));
+    this.app.use(this.seed, require('../routes/seed.routes'));
   }
 
   start() {

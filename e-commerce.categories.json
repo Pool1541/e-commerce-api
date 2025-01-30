@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "652c1d305f8e9b1a622c5c7c"
+  },
+  "name": "sillas-y-mesas",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666786/categories/23845_pictures_product_visual_1_j91wik.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c1dd45f8e9b1a622c5c88"
+  },
+  "name": "componentes-de-computo",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666827/categories/w800_eve0wj.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c20295f8e9b1a622c5ca3"
+  },
+  "name": "fotografía",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666849/categories/cam_ibt3vz.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c5ac02d1012445dfa9446"
+  },
+  "name": "celulares-y-accesorios",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666871/categories/YNJ6Q3PB3BAE5GTX35BRPE6SHQ_wzctxp.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c6f2b2d1012445dfa946d"
+  },
+  "name": "movilidad",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666727/categories/OXSZFLRLLRBYDOTDAC66Q6RA6I_wudrm5.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c74cf2d1012445dfa9478"
+  },
+  "name": "consolas-y-videojuegos",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666900/categories/categor_C3_ADa-VIDEOJUEGOS-PS5-D_zplz9f.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653077d4c8a1360660f0df4a"
+  },
+  "name": "parlantes",
+  "image": "https://res.cloudinary.com/dj6kd6xui/image/upload/v1737666351/categories/jbl-charge-5.png",
+  "__v": 0
+}]
